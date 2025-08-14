@@ -1,0 +1,18 @@
+﻿@model PredictionResult
+
+
+<div class="card border-success shadow-sm mb-3" style="max-width: 100%;">
+    <div class="card-body text-center">
+        <div style="display:inline-block">
+
+            @foreach (var prediction in @Model.Predictions)
+            {
+                <h5 class="card-title text-muted"><strong>Predicted Price</strong></h5>
+                <h2 class="card-text text-success fw-bold">
+                    @prediction.Price.ToString("N2") @prediction.Currency
+                </h2>
+            }
+
+        </div>
+    </div>
+</div>

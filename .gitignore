@@ -1,0 +1,57 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Publish results
+wwwroot/dist/
+wwwroot/node_modules/
+publish/
+*.Publish.xml
+
+# Npm & Yarn
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python (if you have Python scripts/models in your project)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Others
+.env
+.env.*
+.venv
+venv
+
+# VS for Mac
+.vscode/
+.vs/
