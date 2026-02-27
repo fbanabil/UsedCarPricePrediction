@@ -1,5 +1,4 @@
-﻿/* === MOVED FROM Index.cshtml INLINE STYLE === */
-.loading-overlay {
+﻿.loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -96,7 +95,6 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
-/* === PROFESSIONAL DESIGN SYSTEM === */
 :root {
     --primary-color: #2563eb;
     --primary-dark: #1d4ed8;
@@ -145,7 +143,6 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* === MAIN CONTAINER === */
 main.container {
     max-width: 1200px;
     padding: 2rem 1rem !important;
@@ -157,7 +154,6 @@ main.container {
     align-items: center;
 }
 
-/* === PROFESSIONAL CARD DESIGN === */
 .card {
     background: white;
     border: 1px solid var(--gray-200);
@@ -186,7 +182,6 @@ main.container {
     box-shadow: var(--shadow-xl), 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
-/* === PROFESSIONAL TYPOGRAPHY === */
 h2 {
     font-size: 1.875rem !important;
     font-weight: 700 !important;
@@ -203,7 +198,6 @@ h2 {
     font-size: 1rem;
 }
 
-/* === PROFESSIONAL FORM STYLING === */
 .form-label {
     font-size: 0.875rem;
     font-weight: 600;
@@ -240,14 +234,12 @@ h2 {
     color: var(--gray-400);
 }
 
-/* === TEXTAREA STYLING === */
 textarea.form-control {
     min-height: 70px !important;
     resize: vertical;
     font-family: inherit;
 }
 
-/* === FORM GRID LAYOUT === */
 .row.g-3 {
     margin-bottom: 0;
     gap: 1rem;
@@ -257,7 +249,6 @@ textarea.form-control {
     padding: 0;
 }
 
-/* === FORM SECTIONS === */
 .form-section {
     margin-bottom: 1.5rem;
     padding: 1.5rem;
@@ -276,7 +267,6 @@ textarea.form-control {
     display: inline-block;
 }
 
-/* === PROFESSIONAL BUTTON STYLING === */
 .btn {
     font-size: 0.875rem;
     font-weight: 600;
@@ -350,7 +340,6 @@ textarea.form-control {
     box-shadow: var(--shadow);
 }
 
-/* === PROFESSIONAL RESULT STYLING === */
 .result-container {
     width: 100%;
     margin-top: 1.5rem;
@@ -396,7 +385,6 @@ textarea.form-control {
     border-color: var(--success-dark);
 }
 
-/* === PROFESSIONAL LOADING OVERLAY === */
 .loading-overlay {
     position: fixed;
     top: 0;

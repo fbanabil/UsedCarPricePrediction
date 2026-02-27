@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using ServicInterfaces;
 using DataModels.Models;
+using UsedCarPricePrediction.Enums;
 
 namespace Services
 {
@@ -21,18 +22,18 @@ namespace Services
             var input = new
             {
                 year = predictionInputs.year,
-                manufacturer = predictionInputs.manufacturer,
-                model = predictionInputs.model,
+                manufacturer = predictionInputs.manufacturer.GetDisplayName(),
+                model = predictionInputs.model.GetDisplayName(),
                 odometer = predictionInputs.odometer,
-                condition = predictionInputs.condition,
-                cylinders = predictionInputs.cylinders,
-                fuel = predictionInputs.fuel,
-                title_status = predictionInputs.title_status,
-                transmission = predictionInputs.transmission,
-                drive = predictionInputs.drive,
-                type = predictionInputs.type,
-                lat = predictionInputs.lat,
-                Long = predictionInputs.@long,
+                condition = predictionInputs.condition.GetDisplayName(),
+                cylinders = predictionInputs.cylinders.GetDisplayName(),
+                fuel = predictionInputs.fuel.GetDisplayName(),
+                title_status = predictionInputs.title_status.GetDisplayName(),
+                transmission = predictionInputs.transmission.GetDisplayName(),
+                drive = predictionInputs.drive.GetDisplayName(),
+                type = predictionInputs.type.GetDisplayName(),
+                lat = predictionInputs.Lat,
+                Long = predictionInputs.Long,
                 description = predictionInputs.description
             };
             string basePath = AppContext.BaseDirectory;

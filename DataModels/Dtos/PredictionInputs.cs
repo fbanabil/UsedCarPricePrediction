@@ -1,22 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using UsedCarPricePrediction.Enums;
 
 namespace DataModels.Models
 {
     public class PredictionInputs : IValidatableObject
     {
-        public int year { get; set; }
-        public string? manufacturer { get; set; }
-        public string? model { get; set; }
-        public string? condition { get; set; }
-        public string? cylinders { get; set; }
-        public string? fuel { get; set; }
+        public int? year { get; set; }
+        public ManufacturerSelectItem? manufacturer { get; set; }
+        public ModelSelectItem? model { get; set; }
+        public ConditionSelectItem? condition { get; set; }
+        public CylindersSelectItem? cylinders { get; set; }
+        public FuelSelectItem? fuel { get; set; }
         public int odometer { get; set; }
-        public string? title_status { get; set; }
-        public string? transmission { get; set; }
-        public string? drive { get; set; }
-        public string? type { get; set; }
-        public double lat { get; set; }
-        public double @long { get; set; }
+        public TitleStatusSelectItem? title_status { get; set; }
+        public TransmissionSelectItem? transmission { get; set; }
+        public DriveSelectItem? drive { get; set; }
+        public TypeSelectItem? type { get; set; }
+        public double? Lat { get; set; }
+        public double? Long { get; set; }
         public string? description { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -24,23 +25,23 @@ namespace DataModels.Models
             {
                 yield return new ValidationResult("Year must be between 1850 and the current year.", new[] { nameof(year) });
             }
-            if (string.IsNullOrWhiteSpace(manufacturer))
+            if (string.IsNullOrWhiteSpace(manufacturer.ToString()))
             {
                 yield return new ValidationResult("Manufacturer is required.", new[] { nameof(manufacturer) });
             }
-            if (string.IsNullOrWhiteSpace(model))
+            if (string.IsNullOrWhiteSpace(model.ToString()))
             {
                 yield return new ValidationResult("Model is required.", new[] { nameof(model) });
             }
-            if (string.IsNullOrWhiteSpace(condition))
+            if (string.IsNullOrWhiteSpace(condition.ToString()))
             {
                 yield return new ValidationResult("Condition is required.", new[] { nameof(condition) });
             }
-            if (string.IsNullOrWhiteSpace(cylinders))
+            if (string.IsNullOrWhiteSpace(cylinders.ToString()))
             {
                 yield return new ValidationResult("Cylinders is required.", new[] { nameof(cylinders) });
             }
-            if (string.IsNullOrWhiteSpace(fuel))
+            if (string.IsNullOrWhiteSpace(fuel.ToString()))
             {
                 yield return new ValidationResult("Fuel type is required.", new[] { nameof(fuel) });
             }
@@ -48,19 +49,19 @@ namespace DataModels.Models
             {
                 yield return new ValidationResult("Odometer must be a non-negative number.", new[] { nameof(odometer) });
             }
-            if (string.IsNullOrWhiteSpace(title_status))
+            if (string.IsNullOrWhiteSpace(title_status.ToString()))
             {
                 yield return new ValidationResult("Title status is required.", new[] { nameof(title_status) });
             }
-            if (string.IsNullOrWhiteSpace(transmission))
+            if (string.IsNullOrWhiteSpace(transmission.ToString()))
             {
                 yield return new ValidationResult("Transmission type is required.", new[] { nameof(transmission) });
             }
-            if (string.IsNullOrWhiteSpace(drive))
+            if (string.IsNullOrWhiteSpace(drive.ToString()))
             {
                 yield return new ValidationResult("Drive type is required.", new[] { nameof(drive) });
             }
-            if (string.IsNullOrWhiteSpace(type))
+            if (string.IsNullOrWhiteSpace(type.ToString()))
             {
                 yield return new ValidationResult("Type is required.", new[] { nameof(type) });
             }
@@ -73,18 +74,15 @@ namespace DataModels.Models
                 yield return new ValidationResult("Description must be less than 500 characters.", new[] { nameof(description) });
             }
 
-            if (lat<0 || lat > 1000000000)
+            if (Lat>90 || Lat < -90)
             {
-                yield return new ValidationResult("Latitude must be a in range 0 to 10000000000.", new[] { nameof(lat) });
+                yield return new ValidationResult("Latitude must be a in range -90 to +90.", new[] { nameof(Lat) });
             }
 
-            if(@long>0 || @long < -1000000000)
+            if(Long<-180 || Long > 180)
             {
-                yield return new ValidationResult("Longitute must be in range from -1000000000 to  0.", new[] { nameof(@long) } );
+                yield return new ValidationResult("Longitute must be in range from -180 to  +180.", new[] { nameof(Long) } );
             }
-
-            
-
         }
     }
 }

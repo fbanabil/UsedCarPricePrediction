@@ -1,11 +1,14 @@
 using DataModels.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ServicInterfaces;
 using System.Text.Json;
+using UsedCarPricePrediction.Enums;
 
 
 namespace UsedCarPricePrediction.Controllers
 {
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,14 +20,24 @@ namespace UsedCarPricePrediction.Controllers
             _usedCarPricePredictionService = usedCarPricePredictionService;
         }
 
+
+
+
+
+
+
         [Route("/")]
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(new PredictionInputs());
         }
 
-        [Route("/result")]
-        public async Task<IActionResult> Result([FromBody]PredictionInputs  predictionInputs)
+
+
+        [HttpPost]
+        //[Route("/result")]
+        public async Task<IActionResult> Result([FromForm]PredictionInputs predictionInputs)
         {
             if (ModelState.IsValid == false)
             {
@@ -33,7 +46,7 @@ namespace UsedCarPricePrediction.Controllers
             }
 
 
-            //_logger.LogInformation("Received prediction inputs: {@PredictionInputs}", predictionInputs);
+            _logger.LogInformation("Received prediction inputs: {@PredictionInputs}", predictionInputs);
             if (predictionInputs == null)
             {
                 _logger.LogError("Prediction inputs are null.");

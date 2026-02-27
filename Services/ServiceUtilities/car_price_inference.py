@@ -1,5 +1,4 @@
-﻿# car_price_inference.py
-import pandas as pd
+﻿import pandas as pd
 import numpy as np
 import joblib
 import warnings
