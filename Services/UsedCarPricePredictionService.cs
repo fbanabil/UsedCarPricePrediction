@@ -46,7 +46,17 @@ namespace Services
                 PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
             };
             string jsonInput = System.Text.Json.JsonSerializer.Serialize(input, options);
-            string result =await  _pythonRunner.RunPythonScript(scriptPath, jsonInput);
+
+            string result = "";
+            bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            if(isWindows)
+            {
+                result = await _pythonRunner.RunPythonScript(scriptPath, jsonInput);
+            }
+            else
+            {
+                //result = 
+            }
             return result;
         }
 
