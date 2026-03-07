@@ -57,13 +57,13 @@ RUN dotnet publish "./UsedCarPricePrediction.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN pip3 install --no-cache-dir \
-    pandas \
-    numpy \
-    scikit-learn \
-    scipy \
-    joblib \
-    xgboost \
-    lightgbm \
-    catboost
+#RUN pip3 install --no-cache-dir \
+ #   pandas \
+  #  numpy \
+   # scikit-learn \
+#    scipy \
+ #   joblib \
+  #  xgboost \
+   # lightgbm \
+    #catboost
 ENTRYPOINT ["dotnet", "UsedCarPricePrediction.dll"]
