@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Services
 {
@@ -16,13 +17,21 @@ namespace Services
         public async Task<string> RunPythonScript(string scriptPath, string jsonInput)
         {
             string? workingDirectory = Path.GetDirectoryName(scriptPath);
-
-            // Use venv Python executable instead of system Python
-            string pythonExecutable = GetVenvPythonPath(workingDirectory);
+            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            
+            if (!isWindows)
+            {
+                scriptPath = "/src/Services/ServiceUtilities/predict_car_price.py";
+                workingDirectory = "/src/Services/ServiceUtilities";
+            }
+            
+            string pythonExecutable = isWindows
+                ? GetVenvPythonPath(workingDirectory)
+                : "python3";
 
             var startInfo = new ProcessStartInfo
             {
-                FileName = pythonExecutable, // Use venv Python
+                FileName = pythonExecutable, 
                 Arguments = $"\"{scriptPath}\"",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -38,17 +47,20 @@ namespace Services
                     throw new InvalidOperationException("Failed to start Python process.");
 
                 _logger.LogInformation($"Running Python script: {scriptPath} with {pythonExecutable}");
+                _logger.LogInformation($"Working Directory: {workingDirectory}");
                 _logger.LogInformation($"Input JSON: {jsonInput}");
 
-                using (var writer = process.StandardInput)
-                {
-                    writer.WriteLine(jsonInput);
-                }
+                await process.StandardInput.WriteLineAsync(jsonInput);
+                await process.StandardInput.FlushAsync();
+                process.StandardInput.Close();
 
-                string output = process.StandardOutput.ReadToEnd().Trim();
-                string error = process.StandardError.ReadToEnd();
+                var outputTask = process.StandardOutput.ReadToEndAsync();
+                var errorTask = process.StandardError.ReadToEndAsync();
 
-                process.WaitForExit();
+                await process.WaitForExitAsync();
+
+                string output = await outputTask;
+                string error = await errorTask;
 
                 if (process.ExitCode != 0)
                 {
@@ -56,10 +68,13 @@ namespace Services
                     throw new Exception($"Python script failed with error: {error}");
                 }
 
-                return output;
+                _logger.LogInformation($"Python script output: {output}");
+                return output.Trim();
             }
 
         }
+
+
         private string GetVenvPythonPath(string? workingDirectory)
         {
             string venvPythonPath = Path.Combine(workingDirectory, "venv", "Scripts", "python.exe");
@@ -71,7 +86,7 @@ namespace Services
             }
 
             _logger.LogWarning("Virtual environment not found, falling back to system Python");
-            return "python"; // Fallback to system Python
+            return "python";
         }
     }
 

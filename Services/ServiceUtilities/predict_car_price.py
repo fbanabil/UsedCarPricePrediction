@@ -16,6 +16,7 @@ def main():
         predictor = CarPricePredictor()
         
         predicted_price = predictor.predict(sample_data)
+
         
         result = {
             "predicted_price": float(predicted_price[0]),

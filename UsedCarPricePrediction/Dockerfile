@@ -4,45 +4,31 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER root
 
-# Install Python 3.13.0 and dependencies
-RUN apt-get update && apt-get install -y \
-    wget \
-    build-essential \
-    libssl-dev \
-    zlib1g-dev \
-    libbz2-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    libncursesw5-dev \
-    libffi-dev \
-    liblzma-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Install Python 3 and pip
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 \
+        python3-pip \
+        libgomp1 \
+        python3-venv && \
+    rm -rf /var/lib/apt/lists/*
 
-# Download and install Python 3.13.0
-RUN wget https://www.python.org/ftp/python/3.13.0/Python-3.13.0.tgz \
-    && tar -xf Python-3.13.0.tgz \
-    && cd Python-3.13.0 \
-    && ./configure --enable-optimizations \
-    && make -j$(nproc) \
-    && make altinstall \
-    && cd .. \
-    && rm -rf Python-3.13.0.tgz Python-3.13.0
+# Set working directory for Python setup
+WORKDIR /app/Services/ServiceUtilities
 
-# Create symbolic links for python3 and pip3
-RUN ln -s /usr/local/bin/python3.13 /usr/local/bin/python3 \
-    && ln -s /usr/local/bin/pip3.13 /usr/local/bin/pip3
+# Copy Python dependencies and install them
+COPY ["Services/ServiceUtilities/requirements.txt", "./requirements.txt"]
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
-# Upgrade pip
-RUN pip3 install --upgrade pip
+# Copy Python scripts
+COPY ["Services/ServiceUtilities/predict_car_price.py", "./"]
+COPY ["Services/ServiceUtilities/car_price_inference.py", "./"]
 
-# Install Python ML dependencies
-RUN pip3 install --no-cache-dir \
-    pandas \
-    numpy \
-    scikit-learn \
-    scipy \
-    joblib \
-    xgboost
+# Copy ML Models directory
+COPY ["Services/ServiceUtilities/ML_Models/", "./ML_Models/"]
+
+# Grant read & execute access to the Python files
+RUN chmod -R 755 /app/Services
 
 USER $APP_UID
 WORKDIR /app
@@ -71,4 +57,13 @@ RUN dotnet publish "./UsedCarPricePrediction.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+RUN pip3 install --no-cache-dir \
+    pandas \
+    numpy \
+    scikit-learn \
+    scipy \
+    joblib \
+    xgboost \
+    lightgbm \
+    catboost
 ENTRYPOINT ["dotnet", "UsedCarPricePrediction.dll"]

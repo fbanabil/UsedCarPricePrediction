@@ -36,34 +36,52 @@ namespace Services
                 Long = predictionInputs.Long,
                 description = predictionInputs.description
             };
-            string basePath = AppContext.BaseDirectory;
-            string relativePath = Path.Combine("Services","ServiceUtilities", "predict_car_price.py");
-            string scriptPath = Path.Combine(basePath, relativePath);
-            scriptPath = scriptPath.Replace("\\UsedCarPricePrediction\\bin\\Debug\\net8.0", "");
-            scriptPath = scriptPath.Replace("\\", "/");
+
+            string scriptPath = GetPythonScriptPath();
             var options = new System.Text.Json.JsonSerializerOptions
             {
                 PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
             };
             string jsonInput = System.Text.Json.JsonSerializer.Serialize(input, options);
 
-            string result = "";
-            bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-            if(isWindows)
-            {
-                result = await _pythonRunner.RunPythonScript(scriptPath, jsonInput);
-            }
-            else
-            {
-                //result = 
-            }
+            string result = await _pythonRunner.RunPythonScript(scriptPath, jsonInput);
+            
             return result;
         }
 
+        private string GetPythonScriptPath()
+        {
+            bool isWindows = System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
 
+            if (isWindows)
+            {
+                string basePath = AppContext.BaseDirectory;
+                string scriptPath = Path.Combine(basePath, "Services", "ServiceUtilities", "predict_car_price.py");
+                scriptPath = scriptPath.Replace("\\UsedCarPricePrediction\\bin\\Debug\\net8.0", "");
+                return scriptPath.Replace("\\", "/");
+            }
+            else
+            {
+                // Docker/Linux: Python files are always at /app/Services/ServiceUtilities/
+                // This works for both VS fast mode (Debug) and Release, since the
+                // Dockerfile copies scripts to /app/Services/ServiceUtilities/ in the base stage.
+                return "/app/Services/ServiceUtilities/predict_car_price.py";
+            }
+        }
 
         public async Task<bool> EnsureEnviroment()
         {
+            bool isWindows = System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+
+            if (!isWindows)
+            {
+                // In Docker, Python packages are installed globally during image build
+                _logger.LogInformation("Running in Docker/Linux — skipping venv setup.");
+                return true;
+            }
+
             string directory = Directory.GetCurrentDirectory();
             directory = directory.Replace("\\UsedCarPricePrediction", "");
             directory= directory+ "\\UsedCarPricePrediction\\Services\\ServiceUtilities";
