@@ -30,7 +30,6 @@ COPY ["Services/ServiceUtilities/ML_Models/", "./ML_Models/"]
 # Grant read & execute access to the Python files
 RUN chmod -R 755 /app/Services
 
-USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 
@@ -57,13 +56,8 @@ RUN dotnet publish "./UsedCarPricePrediction.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-#RUN pip3 install --no-cache-dir \
- #   pandas \
-  #  numpy \
-   # scikit-learn \
-#    scipy \
- #   joblib \
-  #  xgboost \
-   # lightgbm \
-    #catboost
+
+# Switch to non-root user at the very end
+USER $APP_UID
+
 ENTRYPOINT ["dotnet", "UsedCarPricePrediction.dll"]

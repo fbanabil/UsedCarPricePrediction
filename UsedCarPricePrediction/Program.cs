@@ -12,7 +12,6 @@ var app = builder.Build();
 
 bool EnvironmentSetup = false;
 
-// Running on windows/Linux
 bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
 
 if (isWindows)
