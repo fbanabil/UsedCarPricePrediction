@@ -11,7 +11,7 @@ namespace DataModels.Models
         public ConditionSelectItem? condition { get; set; }
         public CylindersSelectItem? cylinders { get; set; }
         public FuelSelectItem? fuel { get; set; }
-        public int odometer { get; set; }
+        public int? odometer { get; set; }
         public TitleStatusSelectItem? title_status { get; set; }
         public TransmissionSelectItem? transmission { get; set; }
         public DriveSelectItem? drive { get; set; }
