@@ -96,11 +96,13 @@
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --primary-light: #3b82f6;
-    --success-color: #059669;
-    --success-dark: #047857;
+    --primary-color: #0d47a1; /* Royal Navy Blue */
+    --primary-dark: #002171;  /* Deep Navy */
+    --primary-light: #5472d3; /* Glossy Highlight */
+    
+    /* Map success states to the unified Navy theme */
+    --success-color: #0d47a1; 
+    --success-dark: #002171;
     --warning-color: #d97706;
     --danger-color: #dc2626;
     --gray-50: #f9fafb;
@@ -307,18 +309,19 @@ textarea.form-control {
 }
 
 .btn-success {
-    background: linear-gradient(135deg, var(--success-color) 0%, var(--success-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 40%, var(--primary-dark) 100%);
     color: white;
-    box-shadow: var(--shadow-sm);
-    padding: 0.75rem 1.5rem !important;
-    font-size: 0.875rem !important;
+    box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    padding: 0.75rem 1.75rem !important;
+    font-size: 0.9rem !important;
     border-radius: var(--border-radius-sm) !important;
+    border: 1px solid var(--primary-dark);
 }
 
 .btn-success:hover {
-    background: linear-gradient(135deg, var(--success-dark) 0%, #065f46 100%);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, #748ede 0%, var(--primary-light) 40%, var(--primary-color) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(13, 71, 161, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5);
     color: white;
 }
 
@@ -335,15 +338,16 @@ textarea.form-control {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 40%, var(--primary-dark) 100%);
     color: white;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--primary-dark);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, #1e3a8a 100%);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, #748ede 0%, var(--primary-light) 40%, var(--primary-color) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(13, 71, 161, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5);
     color: white;
 }
 
@@ -573,6 +577,10 @@ textarea.form-control {
 }
 
 /* === PROFESSIONAL UTILITY CLASSES === */
+.bg-royal-navy {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 40%, var(--primary-dark) 100%) !important;
+}
+
 .text-muted {
     color: var(--gray-500) !important;
 }
