@@ -89,29 +89,45 @@ The following Python packages are required and are automatically installed via `
 
 ### Method 2: Using Command Line
 
-1. **Clone the repository**
+> **Folder structure note**: When you clone the repo, by default a folder named `UsedCarPricePrediction` is created. Inside it there is a **subfolder also named `UsedCarPricePrediction`** — that inner folder is the web application project. The outer folder is the solution root.
+>
+> ```
+> UsedCarPricePrediction/          ← solution root (repo root)
+> ├── UsedCarPricePrediction/      ← web app project (cd here to run)
+> ├── Services/
+> ├── DataModels/
+> └── ...
+> ```
+
+1. **Clone the repository** (creates the solution root folder)
 
    ```bash
-   git clone <repository-url>
-   cd UsedCarPricePrediction
+   git clone https://github.com/fbanabil/UsedCarPricePrediction
    ```
 
-2. **Restore .NET dependencies** (from the solution root)
+   Or clone into an existing folder:
+   ```bash
+   git clone https://github.com/fbanabil/UsedCarPricePrediction .
+   ```
+
+2. **Restore .NET dependencies** — run from the **solution root** (where `UsedCarPricePrediction.sln` lives)
 
    ```bash
    dotnet restore
    ```
 
-3. **Install Python dependencies** (from the solution root)
+3. **Install Python dependencies** — run from the **solution root**
 
    ```bash
    pip install -r Services/ServiceUtilities/requirements.txt
    ```
 
-4. **Navigate to the web project and run**
+   > On Windows, these are also auto-installed into a `venv` on first run. This manual step ensures packages are available for development/testing outside the app.
+
+4. **Navigate into the web project subfolder and run**
 
    ```bash
-   cd UsedCarPricePrediction
+   cd UsedCarPricePrediction       # this is the inner web project folder, not the solution root
    dotnet run
    ```
 
