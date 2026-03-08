@@ -55,7 +55,29 @@ RUN dotnet publish "./UsedCarPricePrediction.csproj" -c $BUILD_CONFIGURATION -o 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
+
+# Copy the published .NET application
 COPY --from=publish /app/publish .
+
+# Set up Python environment (same as base stage for consistency)
+WORKDIR /app/Services/ServiceUtilities
+
+# Copy Python dependencies and install them
+COPY ["Services/ServiceUtilities/requirements.txt", "./requirements.txt"]
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
+
+# Copy Python scripts
+COPY ["Services/ServiceUtilities/predict_car_price.py", "./"]
+COPY ["Services/ServiceUtilities/car_price_inference.py", "./"]
+
+# Copy ML Models directory
+COPY ["Services/ServiceUtilities/ML_Models/", "./ML_Models/"]
+
+# Grant read & execute access to the Python files
+RUN chmod -R 755 /app/Services
+
+# Switch back to app directory
+WORKDIR /app
 
 # Switch to non-root user at the very end
 USER $APP_UID
