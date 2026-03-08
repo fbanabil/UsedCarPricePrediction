@@ -68,7 +68,7 @@ namespace UsedCarPricePrediction.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error while processing prediction.");
+                return StatusCode(500, "Internal server error while processing prediction. Details : "+ex.Message);
             }
 
             return PartialView("_ResultPartialView", predictionResult1);
