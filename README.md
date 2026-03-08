@@ -2,7 +2,7 @@
 
 A machine learning-powered web application that predicts used car prices based on various vehicle characteristics. Built with ASP.NET Core and Python machine learning models, featuring a **premium automotive-inspired UI**.
 
-![App Screenshot](UsedCarPricePrediction/wwwroot/images/app_screenshot.png)
+![App Screenshot](UsedCarPricePrediction/wwwroot/images/app_SS.png)
 
 ## 🚗 Overview
 
