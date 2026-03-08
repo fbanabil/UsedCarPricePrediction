@@ -1,6 +1,8 @@
 # Used Car Price Prediction
 
-A machine learning-powered web application that predicts used car prices based on various vehicle characteristics. Built with ASP.NET Core and Python machine learning models.
+A machine learning-powered web application that predicts used car prices based on various vehicle characteristics. Built with ASP.NET Core and Python machine learning models, featuring a **premium automotive-inspired UI**.
+
+![App Screenshot](UsedCarPricePrediction/wwwroot/images/app_screenshot.png)
 
 ## 🚗 Overview
 
@@ -19,7 +21,8 @@ This application uses advanced machine learning algorithms to predict used car p
 - **Frontend**: ASP.NET Core MVC with Razor Pages
 - **Backend**: C# .NET 8.0
 - **Machine Learning**: Python 3.13.x with scikit-learn, XGBoost, LightGBM, CatBoost
-- **UI Framework**: Bootstrap 5 with custom CSS
+- **UI Framework**: Bootstrap 5 with custom **Glossy Royal Navy Blue** theme
+- **Typography**: **Dash Horizon** (custom display font) and **Outfit** (base font)
 - **JavaScript**: Vanilla JS with Select2 for enhanced dropdowns
 - **Containerization**: Docker (Linux, port 8080)
 
@@ -207,7 +210,7 @@ UsedCarPricePrediction/
 ### Core Functionality
 
 - **Machine Learning Prediction**: Ensemble of CatBoost, LightGBM, and XGBoost with a meta-model stacker
-- **Professional UI**: Modern, responsive web interface
+- **Premium Automotive UI**: Modern, responsive interface with a high-end Glossy Royal Navy Blue theme and race-inspired typography
 - **Real-time Validation**: Client-side form validation with professional error handling
 - **Geographic Awareness**: Location-based price adjustments using latitude/longitude and K-Means geo-clustering
 - **NLP Feature**: Free-text vehicle description is processed via TF-IDF vectorizer
@@ -215,7 +218,8 @@ UsedCarPricePrediction/
 ### User Interface
 
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Enhanced Dropdowns**: Select2 integration for better user experience
+- **Enhanced Dropdowns**: Select2 integration with custom typography and spacing
+- **Custom Typography**: Integrated **Dash Horizon** for a bold, aggressive automotive feel with optimized letter-spacing
 - **Loading Indicators**: Professional loading animations during prediction
 - **Error Handling**: Contextual error messages with professional styling
 
