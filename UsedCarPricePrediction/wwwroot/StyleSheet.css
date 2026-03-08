@@ -330,8 +330,15 @@ textarea.form-control {
 .btn {
   font-family: "DashHorizon", "Outfit", sans-serif !important;
   font-weight: normal !important;
-  font-size: 1rem;
-  padding: 0.75rem 1.75rem;
+
+  /* === CHANGE ONLY THIS TO RESIZE THE BUTTON === */
+  font-size: 1.3rem;
+
+  /* em padding scales automatically with font-size above — no need to touch these */
+  /* padding-top is smaller to compensate for the Dash Horizon font's built-in top-space */
+  padding: 0.25em 1.2em 0.55em;
+  line-height: 1;
+
   border-radius: var(--border-radius-sm);
   border: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -341,7 +348,6 @@ textarea.form-control {
   justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
-  line-height: 1.5;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -357,8 +363,6 @@ textarea.form-control {
   box-shadow:
     0 4px 6px rgba(13, 71, 161, 0.2),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  padding: 0.75rem 1.75rem !important;
-  font-size: 0.9rem !important;
   border-radius: var(--border-radius-sm) !important;
   border: 1px solid var(--primary-dark);
 }
