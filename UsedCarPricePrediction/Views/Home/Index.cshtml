@@ -1,4 +1,4 @@
-﻿@using System
+@using System
 @using System.ComponentModel.DataAnnotations
 @using System.Reflection
 @using Microsoft.AspNetCore.Mvc.Rendering
@@ -15,152 +15,153 @@
     <form id="carForm" asp-action="Result" asp-controller="Home" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
 
-        <div class="row g-3">
-            <!-- Row 1 -->
-            <div class="col-md-4">
-                <label asp-for="@Model.year" class="form-label">Year</label>
-                <input asp-for="@Model.year" class="form-control form-control-sm" type="number" required />
-                <span asp-validation-for="@Model.year" class="text-danger"></span>
+        <div class="form-group-section">
+            <div class="form-group-title">
+                <i class="bi bi-car-front"></i> Vehicle Identity
             </div>
-
-            <div class="col-md-4">
-                <label asp-for="@Model.odometer" class="form-label">Odometer</label>
-                <input asp-for="@Model.odometer" class="form-control form-control-sm" type="number" required />
-                <span asp-validation-for="@Model.odometer" class="text-danger"></span>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label asp-for="@Model.manufacturer" class="form-label">Manufacturer</label>
+                    <select asp-for="@Model.manufacturer" class="form-select select2" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var man in Enum.GetValues<ManufacturerSelectItem>())
+                        {
+                            <option value="@man">@man</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.manufacturer" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="model" class="form-label">Model</label>
+                    <select asp-for="model" class="form-select select2" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var modelItem in Enum.GetValues<ModelSelectItem>())
+                        {
+                            <option value="@modelItem">@modelItem</option>
+                        }
+                    </select>
+                    <span asp-validation-for="model" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="@Model.year" class="form-label">Model Year</label>
+                    <input asp-for="@Model.year" class="form-control" type="number" placeholder="2024" required />
+                    <span asp-validation-for="@Model.year" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="type" class="form-label">Vehicle Type</label>
+                    <select asp-for="type" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var typeItem in Enum.GetValues<TypeSelectItem>())
+                        {
+                            <option value="@typeItem">@typeItem</option>
+                        }
+                    </select>
+                    <span asp-validation-for="type" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="fuel" class="form-label">Fuel Type</label>
+                    <select asp-for="fuel" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var fuelItem in Enum.GetValues<FuelSelectItem>())
+                        {
+                            <option value="@fuelItem">@fuelItem</option>
+                        }
+                    </select>
+                    <span asp-validation-for="fuel" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="transmission" class="form-label">Transmission</label>
+                    <select asp-for="transmission" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var trans in Enum.GetValues<TransmissionSelectItem>())
+                        {
+                            <option value="@trans">@trans</option>
+                        }
+                    </select>
+                    <span asp-validation-for="transmission" class="text-danger"></span>
+                </div>
             </div>
+        </div>
 
-            <div class="col-md-4">
-                <label asp-for="@Model.condition" class="form-label">Condition</label>
-                <select asp-for="@Model.condition" class="form-select form-select-sm" required>
-                    <option value="">-- Select Condition --</option>
-                    @foreach (var condition in Enum.GetValues<ConditionSelectItem>())
-                    {
-                        <option value="@condition">@condition</option>
-                    }
-                </select>
-                <span asp-validation-for="@Model.condition" class="text-danger"></span>
+        <div class="form-group-section">
+            <div class="form-group-title">
+                <i class="bi bi-gear-wide-connected"></i> Technical Specifications
             </div>
-
-            <!-- Row 2 -->
-            <div class="col-md-8">
-                <label asp-for="@Model.manufacturer" class="form-label">Manufacturer</label>
-                <select asp-for="@Model.manufacturer" class="form-select form-select-sm " required>
-                    <option value="">-- Select Manufacturer --</option>
-                    @foreach (var man in Enum.GetValues<ManufacturerSelectItem>())
-                    {
-                        <option value="@man">@man</option>
-                    }
-                </select>
-                <span asp-validation-for="@Model.manufacturer" class="text-danger"></span>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label asp-for="@Model.odometer" class="form-label">Odometer (mi)</label>
+                    <input asp-for="@Model.odometer" class="form-control" type="number" placeholder="45000" required />
+                    <span asp-validation-for="@Model.odometer" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="@Model.condition" class="form-label">Overall Condition</label>
+                    <select asp-for="@Model.condition" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var condition in Enum.GetValues<ConditionSelectItem>())
+                        {
+                            <option value="@condition">@condition</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.condition" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="cylinders" class="form-label">Engine Cylinders</label>
+                    <select asp-for="cylinders" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var cylinder in Enum.GetValues<CylindersSelectItem>())
+                        {
+                            <option value="@cylinder">@cylinder</option>
+                        }
+                    </select>
+                    <span asp-validation-for="cylinders" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="drive" class="form-label">Drive Train</label>
+                    <select asp-for="drive" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var driveItem in Enum.GetValues<DriveSelectItem>())
+                        {
+                            <option value="@driveItem">@driveItem</option>
+                        }
+                    </select>
+                    <span asp-validation-for="drive" class="text-danger"></span>
+                </div>
             </div>
+        </div>
 
-            <div class="col-md-4">
-                <label asp-for="cylinders" class="form-label">Cylinders</label>
-                <select asp-for="cylinders" class="form-select form-select-sm" required>
-                    <option value="">-- Select Cylinders --</option>
-                    @foreach (var cylinder in Enum.GetValues<CylindersSelectItem>())
-                    {
-                        <option value="@cylinder">@cylinder</option>
-                    }
-                </select>
-                <span asp-validation-for="cylinders" class="text-danger"></span>
+        <div class="form-group-section">
+            <div class="form-group-title">
+                <i class="bi bi-geo-alt"></i> Location & Details
             </div>
-
-            <!-- Row 3 -->
-            <div class="col-12">
-                <label asp-for="model" class="form-label">Model</label>
-                <select asp-for="model" class="form-select form-select-sm " required>
-                    <option value="">-- Select Model --</option>
-                    @foreach (var modelItem in Enum.GetValues<ModelSelectItem>())
-                    {
-                        <option value="@modelItem">@modelItem</option>
-                    }
-                </select>
-                <span asp-validation-for="model" class="text-danger"></span>
-            </div>
-
-            <!-- Row 4 -->
-            <div class="col-md-4">
-                <label asp-for="fuel" class="form-label">Fuel</label>
-                <select asp-for="fuel" class="form-select form-select-sm " required>
-                    <option value="">-- Select Fuel --</option>
-                    @foreach (var fuelItem in Enum.GetValues<FuelSelectItem>())
-                    {
-                        <option value="@fuelItem">@fuelItem</option>
-                    }
-                </select>
-                <span asp-validation-for="fuel" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-4">
-                <label asp-for="transmission" class="form-label">Transmission</label>
-                <select asp-for="transmission" class="form-select form-select-sm " required>
-                    <option value="">-- Select Transmission --</option>
-                    @foreach (var trans in Enum.GetValues<TransmissionSelectItem>())
-                    {
-                        <option value="@trans">@trans</option>
-                    }
-                </select>
-                <span asp-validation-for="transmission" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-4">
-                <label asp-for="drive" class="form-label">Drive</label>
-                <select asp-for="drive" class="form-select form-select-sm " required>
-                    <option value="">-- Select Drive --</option>
-                    @foreach (var driveItem in Enum.GetValues<DriveSelectItem>())
-                    {
-                        <option value="@driveItem">@driveItem</option>
-                    }
-                </select>
-                <span asp-validation-for="drive" class="text-danger"></span>
-            </div>
-
-            <!-- Row 5 -->
-            <div class="col-md-6">
-                <label asp-for="type" class="form-label">Type</label>
-                <select asp-for="type" class="form-select form-select-sm " required>
-                    <option value="">-- Select Type --</option>
-                    @foreach (var typeItem in Enum.GetValues<TypeSelectItem>())
-                    {
-                        <option value="@typeItem">@typeItem</option>
-                    }
-                </select>
-                <span asp-validation-for="type" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-6">
-                <label asp-for="title_status" class="form-label">Title Status</label>
-                <select asp-for="title_status" class="form-select form-select-sm " required>
-                    <option value="">-- Select Title Status --</option>
-                    @foreach (var titleStatus in Enum.GetValues<TitleStatusSelectItem>())
-                    {
-                        <option value="@titleStatus">@titleStatus</option>
-                    }
-                </select>
-                <span asp-validation-for="title_status" class="text-danger"></span>
-            </div>
-
-            <!-- Row 6 -->
-            <div class="col-md-6">
-                <label asp-for="Lat" class="form-label">Latitude</label>
-                <input asp-for="Lat" class="form-control form-control-sm" type="number" step="any" />
-                <span asp-validation-for="Lat" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-6">
-                <label asp-for="Long" class="form-label">Longitude</label>
-                <input asp-for="Long" class="form-control form-control-sm" type="number" step="any" />
-                <span asp-validation-for="Long" class="text-danger"></span>
-            </div>
-
-            <!-- Row 7 -->
-            <div class="col-12">
-                <label asp-for="description" class="form-label">Description</label>
-                <textarea asp-for="description" class="form-control form-control-sm" rows="3"
-                          style="resize:none; overflow:hidden;" oninput="autoResize(this)"
-                          placeholder="Enter car description..."></textarea>
-                <span asp-validation-for="description" class="text-danger"></span>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label asp-for="title_status" class="form-label">Title Status</label>
+                    <select asp-for="title_status" class="form-select" required>
+                        <option value="">-- Select --</option>
+                        @foreach (var titleStatus in Enum.GetValues<TitleStatusSelectItem>())
+                        {
+                            <option value="@titleStatus">@titleStatus</option>
+                        }
+                    </select>
+                    <span asp-validation-for="title_status" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Lat" class="form-label">Latitude</label>
+                    <input asp-for="Lat" class="form-control" type="number" step="any" placeholder="37.77" />
+                    <span asp-validation-for="Lat" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Long" class="form-label">Longitude</label>
+                    <input asp-for="Long" class="form-control" type="number" step="any" placeholder="-122.41" />
+                    <span asp-validation-for="Long" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="description" class="form-label">Additional Description</label>
+                    <textarea asp-for="description" class="form-control" rows="3"
+                              style="resize:none; overflow:hidden;" oninput="autoResize(this)"
+                              placeholder="Briefly describe any unique features or issues..."></textarea>
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
             </div>
         </div>
 
