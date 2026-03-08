@@ -82,9 +82,15 @@ namespace Services
                 return true;
             }
 
-            string directory = Directory.GetCurrentDirectory();
-            directory = directory.Replace("\\UsedCarPricePrediction", "");
-            directory= directory+ "\\UsedCarPricePrediction\\Services\\ServiceUtilities";
+            string currentDir = Directory.GetCurrentDirectory();
+            string? solutionRoot = Directory.GetParent(currentDir)?.FullName;
+
+            if (string.IsNullOrEmpty(solutionRoot))
+            {
+                throw new InvalidOperationException("Could not determine solution root directory.");
+            }
+
+string directory = Path.Combine(solutionRoot, "Services", "ServiceUtilities");
             _logger.LogInformation("Ensuring Python environment setup in directory: {Directory}", directory);
             try
             {
