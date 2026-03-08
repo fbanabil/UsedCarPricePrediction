@@ -21,8 +21,8 @@ namespace Services
             
             if (!isWindows)
             {
-                scriptPath = "/src/Services/ServiceUtilities/predict_car_price.py";
-                workingDirectory = "/src/Services/ServiceUtilities";
+                scriptPath = "/app/Services/ServiceUtilities/predict_car_price.py";
+                workingDirectory = "/app/Services/ServiceUtilities";
             }
             
             string pythonExecutable = isWindows
