@@ -32,7 +32,7 @@
                     <span asp-validation-for="@Model.manufacturer" class="text-danger"></span>
                 </div>
                 <div class="col-md-6">
-                    <label asp-for="model" class="form-label">Model (Selec option may be slow)</label>
+                    <label asp-for="model" class="form-label">Model (Select option may be slow)</label>
                     <select asp-for="model" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var modelItem in Enum.GetValues<ModelSelectItem>())
