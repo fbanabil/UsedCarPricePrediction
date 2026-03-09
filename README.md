@@ -236,6 +236,9 @@ UsedCarPricePrediction/
 
 The application uses an ensemble stacking approach with these pre-trained models:
 
+> 📓 **Training Notebook**: The models were trained using this Kaggle notebook: [Used Car Price Prediction with Tree-Based Models](https://www.kaggle.com/code/abidahmed123/used-car-price-prediction-with-tree-based-models)
+
+
 1. **CatBoost** (`best_cat_model.pkl`): Gradient boosting with native categorical feature support
 2. **LightGBM** (`best_lgb_model.pkl`): Fast gradient boosting framework
 3. **XGBoost** (`best_xgb_model.pkl`): Extreme gradient boosting
