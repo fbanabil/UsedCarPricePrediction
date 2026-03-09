@@ -32,7 +32,7 @@
                     <span asp-validation-for="@Model.manufacturer" class="text-danger"></span>
                 </div>
                 <div class="col-md-6">
-                    <label asp-for="model" class="form-label">Model</label>
+                    <label asp-for="model" class="form-label">Model (Selec option may be slow)</label>
                     <select asp-for="model" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var modelItem in Enum.GetValues<ModelSelectItem>())
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="type" class="form-label">Vehicle Type</label>
-                    <select asp-for="type" class="form-select" required>
+                    <select asp-for="type" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var typeItem in Enum.GetValues<TypeSelectItem>())
                         {
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="fuel" class="form-label">Fuel Type</label>
-                    <select asp-for="fuel" class="form-select" required>
+                    <select asp-for="fuel" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var fuelItem in Enum.GetValues<FuelSelectItem>())
                         {
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="transmission" class="form-label">Transmission</label>
-                    <select asp-for="transmission" class="form-select" required>
+                    <select asp-for="transmission" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var trans in Enum.GetValues<TransmissionSelectItem>())
                         {
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-md-3">
                     <label asp-for="@Model.condition" class="form-label">Overall Condition</label>
-                    <select asp-for="@Model.condition" class="form-select" required>
+                    <select asp-for="@Model.condition" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var condition in Enum.GetValues<ConditionSelectItem>())
                         {
@@ -106,7 +106,7 @@
                 </div>
                 <div class="col-md-3">
                     <label asp-for="cylinders" class="form-label">Engine Cylinders</label>
-                    <select asp-for="cylinders" class="form-select" required>
+                    <select asp-for="cylinders" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var cylinder in Enum.GetValues<CylindersSelectItem>())
                         {
@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-md-3">
                     <label asp-for="drive" class="form-label">Drive Train</label>
-                    <select asp-for="drive" class="form-select" required>
+                    <select asp-for="drive" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var driveItem in Enum.GetValues<DriveSelectItem>())
                         {
@@ -136,7 +136,7 @@
             <div class="row g-3">
                 <div class="col-md-3">
                     <label asp-for="title_status" class="form-label">Title Status</label>
-                    <select asp-for="title_status" class="form-select" required>
+                    <select asp-for="title_status" class="form-select select2" required>
                         <option value="">-- Select --</option>
                         @foreach (var titleStatus in Enum.GetValues<TitleStatusSelectItem>())
                         {
