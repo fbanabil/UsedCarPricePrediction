@@ -57,10 +57,14 @@ namespace UsedCarPricePrediction.Controllers
             try
             {
                 string predictionResult = await _usedCarPricePredictionService.PredictPrice(predictionInputs);
-                ResultJson json = JsonSerializer.Deserialize<ResultJson>(predictionResult);
+                ResultJson? json = JsonSerializer.Deserialize<ResultJson>(predictionResult);
+
+                if (json == null)
+                {
+                    throw new InvalidOperationException("Failed to deserialize prediction result");
+                }
 
                 PredictionResultSingle predictionResultSingle = new PredictionResultSingle();
-
                 predictionResultSingle.Currency = "Usd";
                 predictionResultSingle.Price = Convert.ToDouble(json.predicted_price);
 

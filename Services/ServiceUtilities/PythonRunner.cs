@@ -77,6 +77,12 @@ namespace Services
 
         private string GetVenvPythonPath(string? workingDirectory)
         {
+            if (string.IsNullOrEmpty(workingDirectory))
+            {
+                _logger.LogWarning("Working directory is null or empty, falling back to system Python");
+                return "python";
+            }
+
             string venvPythonPath = Path.Combine(workingDirectory, "venv", "Scripts", "python.exe");
 
             if (File.Exists(venvPythonPath))

@@ -63,9 +63,6 @@ namespace Services
             }
             else
             {
-                // Docker/Linux: Python files are always at /app/Services/ServiceUtilities/
-                // This works for both VS fast mode (Debug) and Release, since the
-                // Dockerfile copies scripts to /app/Services/ServiceUtilities/ in the base stage.
                 return "/app/Services/ServiceUtilities/predict_car_price.py";
             }
         }

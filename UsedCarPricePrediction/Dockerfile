@@ -62,15 +62,14 @@ COPY --from=publish /app/publish .
 # Set up Python environment (same as base stage for consistency)
 WORKDIR /app/Services/ServiceUtilities
 
-# Copy Python dependencies and install them
+# Copy Python dependencies and install them (already done in base stage, but ensuring consistency)
 COPY ["Services/ServiceUtilities/requirements.txt", "./requirements.txt"]
-RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
-# Copy Python scripts
+# Copy Python scripts (already in base, but ensuring they're in final)
 COPY ["Services/ServiceUtilities/predict_car_price.py", "./"]
 COPY ["Services/ServiceUtilities/car_price_inference.py", "./"]
 
-# Copy ML Models directory
+# Copy ML Models directory (already in base, but ensuring they're in final)
 COPY ["Services/ServiceUtilities/ML_Models/", "./ML_Models/"]
 
 # Grant read & execute access to the Python files
@@ -79,7 +78,11 @@ RUN chmod -R 755 /app/Services
 # Switch back to app directory
 WORKDIR /app
 
-# Switch to non-root user at the very end
-USER $APP_UID
+# Create non-root user for better security
+RUN useradd -m -u 1000 appuser && \
+    chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
 
 ENTRYPOINT ["dotnet", "UsedCarPricePrediction.dll"]
