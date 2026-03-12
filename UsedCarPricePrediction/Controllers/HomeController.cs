@@ -37,6 +37,7 @@ namespace UsedCarPricePrediction.Controllers
 
         [HttpPost]
         //[Route("/result")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Result([FromForm]PredictionInputs predictionInputs)
         {
             if (ModelState.IsValid == false)

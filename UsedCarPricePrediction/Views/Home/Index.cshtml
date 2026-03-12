@@ -13,6 +13,7 @@
     <h2 class="mb-3 text-center text-success fw-semibold">Enter Car Details</h2>
 
     <form id="carForm" asp-action="Result" asp-controller="Home" method="post">
+        @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
 
         <div class="form-group-section">
